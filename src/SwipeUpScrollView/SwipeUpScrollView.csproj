@@ -14,7 +14,7 @@
     <Owners>James Williams</Owners>
     <PackageProjectUrl>https://github.com/Jimiwillz/SwipeUpScrollView</PackageProjectUrl>
     <Title>SwipeUpScrollView</Title>
-    <ReleaseVersion>0.1-beta</ReleaseVersion>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

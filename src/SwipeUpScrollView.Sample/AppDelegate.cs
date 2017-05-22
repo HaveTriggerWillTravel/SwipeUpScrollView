@@ -33,7 +33,7 @@ namespace SwipeUpScrollView.Sample
             viewController.MinScale = 0.9f;
 			viewController.SwipeUpScrollViewHeight = 100;
 			viewController.CoverStatusBar = false;
-			viewController.CoverNavigationBar = false;
+			viewController.CoverNavigationBar = true;
 
 			var navigationController = new UINavigationController(viewController);
 			var barButtonItem = new UIBarButtonItem();

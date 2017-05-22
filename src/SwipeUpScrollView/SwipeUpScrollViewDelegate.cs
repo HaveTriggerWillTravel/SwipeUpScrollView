@@ -173,12 +173,12 @@ namespace SwipeUpScrollView
 
         public void AddPlaceHolderViewIfNeeded()
         {
-            var minContentHeight = _scrollViewRaisingOffset;
+            var minContentHeight = _scrollViewRaisingOffset + ScrollViewHeight;
             if (_scrollView.ContentSize.Height < minContentHeight)
             {
                 var placeHolderView = new UIView();
                 placeHolderView.TranslatesAutoresizingMaskIntoConstraints = false;
-                placeHolderView.AddConstraint(NSLayoutConstraint.Create(placeHolderView, NSLayoutAttribute.Height, NSLayoutRelation.Equal, 1, minContentHeight - _scrollView.ContentSize.Height + ScrollViewHeight));
+                placeHolderView.AddConstraint(NSLayoutConstraint.Create(placeHolderView, NSLayoutAttribute.Height, NSLayoutRelation.Equal, 1, minContentHeight - _scrollView.ContentSize.Height));
                 _stackView.AddArrangedSubview(placeHolderView);
                 _stackView.AddConstraint(NSLayoutConstraint.Create(placeHolderView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, _stackView, NSLayoutAttribute.Width, 1, 0));
             }

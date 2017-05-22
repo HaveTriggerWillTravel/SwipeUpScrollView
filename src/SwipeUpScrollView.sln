@@ -57,11 +57,7 @@ Global
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
-		$1.DirectoryNamespaceAssociation = None
-		$1.ResourceNamePolicy = FileFormatDefault
 		$0.StandardHeader = $2
-		$2.Text = 
-		$2.IncludeInNewFiles = True
 		$0.NameConventionPolicy = $3
 		$3.Rules = $4
 		$4.NamingRule = $5
@@ -187,7 +183,6 @@ Global
 		$24.IncludeInstanceMembers = True
 		$24.IncludeStaticEntities = True
 		$0.VersionControlPolicy = $26
-		$26.inheritsSet = Mono
-		version = 0.1-beta
+		version = 1.0.0
 	EndGlobalSection
 EndGlobal

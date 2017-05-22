@@ -1,7 +1,7 @@
 # SwipeUpScrollView
 Xamarin.iOS library for sliding content up from the bottom of the screen
 
-#### To use, set the main view which is a single UIView and the scrollable content which is an array of UIVIews, i.e.
+### To use, set the main view which is a single UIView and the scrollable content which is an array of UIVIews, i.e.
 
 var swipeUpScrollViewController = new SwipeUpScrollViewController();
 swipeUpScrollViewController.SwipeUpViewList = new UIView[] { view1, view2, view3, view4 etc.. };
