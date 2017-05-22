@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0391E33B-F8A0-482A-B226-E5D0ED702832}</ProjectGuid>
+    <Description>Custom UIViewController that slides scrollable content up from bottom of screen which covers the main content view on screen.</Description>
+    <PackageId>SwipeUpScrollView</PackageId>
+    <PackageVersion>0.1.0-beta</PackageVersion>
+    <Authors>James Williams</Authors>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SwipeUpScrollView.NuGet</RootNamespace>
+    <UsePartialTypes>false</UsePartialTypes>
+    <AssemblyName>SwipeUpScrollView.NuGet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Owners>James Williams</Owners>
+    <Copyright>James Williams</Copyright>
+    <PackageTags>xamarin, ios, xamarin.ios, slidinguppanel, swipeupscrollview</PackageTags>
+    <Title>SwipeUpScrollView</Title>
+    <PackageProjectUrl>https://github.com/Jimiwillz/SwipeUpScrollView</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Jimiwillz/SwipeUpScrollView/blob/master/LICENSE</PackageLicenseUrl>
+    <ReleaseVersion>0.1-beta</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="readme.txt">
+      <IncludeInPackage>true</IncludeInPackage>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Build.Packaging">
+      <Version>0.1.248</Version>
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SwipeUpScrollView\SwipeUpScrollView.csproj">
+      <Project>{840030B0-D5CE-43AE-A6C4-F2159E58D186}</Project>
+      <Name>SwipeUpScrollView</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets" Condition="Exists('$(NuGetAuthoringPath)\NuGet.Packaging.Authoring.targets')" />
+</Project>
