@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using CoreGraphics;
 using UIKit;
 
@@ -12,6 +13,8 @@ namespace SwipeUpScrollView
 		private SlidingContentViewController _slidingContentScrollViewController;
 		private UIStackView _stackView;
 		private HitTestView _hitTestView;
+
+        private bool _placeHoldersAdded;
 
 		private const int _navigationBarHeight = 44;
 
@@ -107,7 +110,7 @@ namespace SwipeUpScrollView
 						offset -= UIApplication.SharedApplication.StatusBarFrame.Height;
 					}
 				}
-				return offset;
+                return offset;
 			}
 		}
 
@@ -162,6 +165,8 @@ namespace SwipeUpScrollView
 			_stackView.Distribution = UIStackViewDistribution.EqualSpacing;
 			_stackView.Spacing = 0;
 
+            _placeHoldersAdded = false;
+
 			foreach (var view in views)
 			{
 				_stackView.AddArrangedSubview(view);
@@ -173,14 +178,26 @@ namespace SwipeUpScrollView
 
         public void AddPlaceHolderViewIfNeeded()
         {
-            var minContentHeight = _scrollViewRaisingOffset + ScrollViewHeight;
-            if (_scrollView.ContentSize.Height < minContentHeight)
+            if (_scrollView.ContentSize.Height > 0
+                && !_placeHoldersAdded)
             {
-                var placeHolderView = new UIView();
-                placeHolderView.TranslatesAutoresizingMaskIntoConstraints = false;
-                placeHolderView.AddConstraint(NSLayoutConstraint.Create(placeHolderView, NSLayoutAttribute.Height, NSLayoutRelation.Equal, 1, minContentHeight - _scrollView.ContentSize.Height));
-                _stackView.AddArrangedSubview(placeHolderView);
-                _stackView.AddConstraint(NSLayoutConstraint.Create(placeHolderView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, _stackView, NSLayoutAttribute.Width, 1, 0));
+                _placeHoldersAdded = true;
+                var minContentHeight = _scrollViewRaisingOffset + ScrollViewHeight;
+
+                nfloat bottomMargin = 0;
+                if (UIDevice.CurrentDevice.CheckSystemVersion(11,0))
+                {
+                    bottomMargin = UIApplication.SharedApplication.KeyWindow.SafeAreaInsets.Bottom;
+                }
+
+                if (_scrollView.ContentSize.Height < minContentHeight)
+                {
+                    var placeHolderView = new UIView();
+                    placeHolderView.TranslatesAutoresizingMaskIntoConstraints = false;
+                    placeHolderView.AddConstraint(NSLayoutConstraint.Create(placeHolderView, NSLayoutAttribute.Height, NSLayoutRelation.Equal, 1, minContentHeight - _scrollView.ContentSize.Height - bottomMargin));
+                    _stackView.AddArrangedSubview(placeHolderView);
+                    _stackView.AddConstraint(NSLayoutConstraint.Create(placeHolderView, NSLayoutAttribute.Width, NSLayoutRelation.Equal, _stackView, NSLayoutAttribute.Width, 1, 0));
+                }
             }
         }
 
@@ -237,11 +254,26 @@ namespace SwipeUpScrollView
 			UIView.Animate(0.5f, () => {
 				_scrollView.SetContentOffset(new CGPoint(0, 0), false);
 			});
+
+            //Hack to ensure IsScrollViewRaised is correct after raising via tapping
+            Task.Factory.StartNew(async () =>
+            {
+                await Task.Delay(500);
+                _slidingContentScrollViewController.InvokeOnMainThread(() =>
+                {
+                    DecelerationEnded();
+                });
+            });
 		}
 
 		public void LowerScrollView()
 		{
 			IsScrollViewRaised = false;
+
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11,0))
+            {
+                _scrollView.ContentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.Never;
+            }
 
 			_scrollView.SetContentOffset(new CGPoint(0, -_scrollViewRaisingOffset), false);
 			_scrollView.ContentInset = new UIEdgeInsets(_scrollViewRaisingOffset, 0, 0, 0);
@@ -251,6 +283,7 @@ namespace SwipeUpScrollView
 		{
 			if (!IsScrollViewRaised && TapToRaiseEnabled)
 			{
+                AddPlaceHolderViewIfNeeded();
 				RaiseScrollView();
 			}
 		}

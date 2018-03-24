@@ -136,12 +136,23 @@ namespace SwipeUpScrollView
 			SwipeUpScrollView.TranslatesAutoresizingMaskIntoConstraints = false;
 			AutomaticallyAdjustsScrollViewInsets = false;
 
+            NSLayoutConstraint bottomConstraint;
+
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11,0))
+            {
+                bottomConstraint = NSLayoutConstraint.Create(SwipeUpScrollView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View.SafeAreaLayoutGuide, NSLayoutAttribute.Bottom, 1, 0);
+            }
+            else
+            {
+                bottomConstraint = NSLayoutConstraint.Create(SwipeUpScrollView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0);
+            }
+
 			var constraints = new NSLayoutConstraint[] 
 			{ 
 				NSLayoutConstraint.Create(SwipeUpScrollView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, View, NSLayoutAttribute.Top, 1, 0),
 				NSLayoutConstraint.Create(SwipeUpScrollView, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, View, NSLayoutAttribute.Leading, 1, 0),
 				NSLayoutConstraint.Create(SwipeUpScrollView, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, View, NSLayoutAttribute.Trailing, 1, 0),
-				NSLayoutConstraint.Create(SwipeUpScrollView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0)
+                bottomConstraint
 			};
 
 			View.AddSubview(SwipeUpScrollView);

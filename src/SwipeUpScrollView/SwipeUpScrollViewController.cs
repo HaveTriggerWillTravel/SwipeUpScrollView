@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Linq;
 using CoreGraphics;
 using Foundation;
@@ -185,7 +185,7 @@ namespace SwipeUpScrollView
 
 				View.AddSubview(MainView);
 
-				_mainViewBottomConstraint = NSLayoutConstraint.Create(MainView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0);
+                _mainViewBottomConstraint = NSLayoutConstraint.Create(MainView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, View, NSLayoutAttribute.Bottom, 1, 0);
 
 				_contentViewConstraints = new NSLayoutConstraint[]
 				{

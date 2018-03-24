@@ -7,7 +7,7 @@
     <ProjectGuid>{0391E33B-F8A0-482A-B226-E5D0ED702832}</ProjectGuid>
     <Description>Custom UIViewController that slides scrollable content up from bottom of screen which covers the main content view on screen.</Description>
     <PackageId>SwipeUpScrollView</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Authors>James Williams</Authors>
     <DevelopmentDependency>false</DevelopmentDependency>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -23,7 +23,7 @@
     <PackageProjectUrl>https://github.com/HaveTriggerWillTravel/SwipeUpScrollView/</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/HaveTriggerWillTravel/SwipeUpScrollView/blob/master/LICENSE</PackageLicenseUrl>
     <ReleaseVersion>1.0.0</ReleaseVersion>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Adds iOS 11 and iPhone X support</PackageReleaseNotes>
     <Summary>Xamarin.iOS library for sliding content up from the bottom of the screen.</Summary>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NuGet.Build.Packaging">
-      <Version>0.1.248</Version>
+      <Version>0.2.2</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
